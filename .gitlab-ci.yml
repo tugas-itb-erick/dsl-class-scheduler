@@ -16,7 +16,7 @@ before_script:
 
 build:
   stage: build
-  script: gradle --build-cache assemble -Dhttp.proxyHost=167.205.22.102 -Dhttp.proxyPort=8800
+  script: gradle --build-cache assemble -Dhttps.proxyHost=167.205.22.102 -Dhttps.proxyPort=8800
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: push
