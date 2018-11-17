@@ -10,6 +10,16 @@ image: gradle:alpine
 # isolated from any previous builds.
 variables:
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+  HTTP_PROXY: http://167.205.22.102:8800
+  http_proxy: http://167.205.22.102:8800
+  HTTPS_PROXY: http://167.205.22.102:8800
+  https_proxy: http://167.205.22.102:8800
+  FTP_PROXY: http://167.205.22.102:8800
+  ftp_proxy: http://167.205.22.102:8800
+  ALL_PROXY: http://167.205.22.102:8800
+  all_proxy: http://167.205.22.102:8800
+  NO_PROXY: "localhost,127.0.0.1"
+
 
 before_script:
   - export GRADLE_USER_HOME=`pwd`/.gradle
