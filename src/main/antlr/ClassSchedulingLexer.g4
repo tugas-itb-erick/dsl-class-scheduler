@@ -39,9 +39,13 @@ CLASSROOM  : C L A S S R O O M;
 CLASSROOMS : C L A S S R O O M S;
 CLASS      : C L A S S;
 CLASSES    : C L A S S E S;
+COURSE: C O U R S E;
+COURSES: C O U R S E S;
 
 /* OPERATOR */
 EQ : '=';
+OPEN_PARENTHESIS: '(';
+CLOSE_PARENTHESIS: ')';
 
 /* Preposition */
 AND: A N D;
@@ -49,13 +53,13 @@ SET: S E T;
 WITH: W I T H;
 END_STATEMENT: ';';
 
-fragment DIGIT : [0-9];
+fragment DIGIT       : [0-9];
 fragment ALPHA_LOWER : [a-z];
 fragment ALPHA_UPPER : [A-Z];
 fragment UNDERSCORE  : '_';
 fragment CHAR        : UNDERSCORE | ALPHA_LOWER | ALPHA_UPPER;
 fragment LETTER      : CHAR | DIGIT;
-fragment INT  : DIGIT+;
+fragment INT         : DIGIT+;
 
 /* Whitespace */
 WS : [ \t\r\n]+ -> channel(HIDDEN);
