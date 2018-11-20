@@ -35,6 +35,7 @@ DELETE : D E L E T E;
 
 /* Entity */
 FACILITY   : F A C I L I T Y;
+FACILITIES : F A C I L I T I E S;
 CLASSROOM  : C L A S S R O O M;
 CLASSROOMS : C L A S S R O O M S;
 CLASS      : C L A S S;
@@ -45,15 +46,15 @@ TIMESLOT   : T I M E S L O T;
 TIMESLOTS  : T I M E S L O T S;
 
 /* OPERATOR */
-EQ : '=';
-OPEN_PARENTHESIS: '(';
-CLOSE_PARENTHESIS: ')';
+EQ                : '=';
+OPEN_PARENTHESIS  : '(';
+CLOSE_PARENTHESIS : ')';
 
 /* Preposition */
-AND: A N D;
-SET: S E T;
-WITH: W I T H;
-END_STATEMENT: ';';
+AND           : A N D;
+SET           : S E T;
+WITH          : W I T H;
+END_STATEMENT : ';';
 
 fragment DIGIT       : [0-9];
 fragment ALPHA_LOWER : [a-z];
@@ -64,7 +65,7 @@ fragment LETTER      : CHAR | DIGIT;
 fragment INT         : DIGIT+;
 
 /* Whitespace */
-WS : [ \t\r\n]+ -> channel(HIDDEN);
+WS   : [ \t\r\n]+ -> channel(HIDDEN);
 WORD : LETTER+;
 
 /* PARAMS */

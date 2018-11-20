@@ -6,40 +6,37 @@ options {tokenVocab=ClassSchedulingLexer;}
 createFacility
     : CREATE FACILITY WORD END_STATEMENT;
 
-showFacility
-    : SHOW FACILITY WORD END_STATEMENT;
+showAllFacilities
+    : SHOW FACILITIES END_STATEMENT;
 
 deleteFacility
     : DELETE FACILITY WORD END_STATEMENT;
+
+deleteAllFacilities
+    : DELETE FACILITIES END_STATEMENT;
 
 // Classroom
 createClassroom
     : CREATE CLASSROOM WORD WITH WORD EQ WORD (AND WORD EQ WORD)* END_STATEMENT; // masih perlu diganti regex
 
-showClassroom
-    : SHOW CLASSROOM WORD END_STATEMENT;
-
-showAllClassroom
-    : SHOW CLASSROOMS END_STATEMENT;
-
 updateClassroom
     : UPDATE CLASSROOM WORD SET WITH WORD EQ WORD (AND WORD EQ WORD)* END_STATEMENT; // masih perlu diganti regex
 
-deleteCLassroom
+showClassroom
+    : SHOW CLASSROOM WORD END_STATEMENT;
+
+showAllClassrooms
+    : SHOW CLASSROOMS END_STATEMENT;
+
+deleteClassroom
     : DELETE CLASSROOM WORD END_STATEMENT;
 
-deleteAllClassroom
+deleteAllClassrooms
     : DELETE CLASSROOMS END_STATEMENT;
 
 // Class
 createClass
     : CREATE CLASS WORD WITH WORD EQ WORD (AND WORD EQ WORD)* END_STATEMENT;
-
-showClass
-    : SHOW CLASS WORD WITH WORD EQ WORD END_STATEMENT;
-
-showAllClass
-    : SHOW CLASSES END_STATEMENT;
 
 updateClass
     : UPDATE CLASS WORD WITH WORD EQ WORD SET WITH WORD EQ WORD (AND WORD EQ WORD)* END_STATEMENT;
@@ -47,8 +44,14 @@ updateClass
 deleteClass
     : DELETE CLASS WORD END_STATEMENT;
 
-deleteAllClass
+deleteAllClasses
     : DELETE CLASSES END_STATEMENT;
+
+showClass
+    : SHOW CLASS WORD WITH WORD EQ WORD END_STATEMENT;
+
+showAllClasses
+    : SHOW CLASSES END_STATEMENT;
 
 // Course
 createCourse
@@ -60,10 +63,13 @@ updateCourse
 deleteCourse
     : DELETE COURSE WORD END_STATEMENT;
 
+deleteAllCourses
+    : DELETE COURSES END_STATEMENT;
+
 showCourse
     : SHOW COURSE WORD END_STATEMENT;
 
-showCourses
+showAllCourses
     : SHOW COURSES END_STATEMENT;
 
 // Timeslot
@@ -76,8 +82,11 @@ updateTimeslot
 deleteTimeslot
     : DELETE TIMESLOT WORD WITH WORD EQ WORD (AND WORD EQ WORD)* END_STATEMENT;
 
-showTimeslots
-    : SHOW TIMESLOTS END_STATEMENT;
+deleteAllTimeslots
+    : DELETE TIMESLOTS END_STATEMENT;
 
 showTimeslot
     : SHOW TIMESLOT WORD (WITH WORD EQ WORD)? END_STATEMENT;
+
+showAllTimeslots
+    : SHOW TIMESLOTS END_STATEMENT;
