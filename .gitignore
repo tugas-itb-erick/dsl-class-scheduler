@@ -136,4 +136,6 @@ gradle-app.setting
 ### Gradle Patch ###
 **/build/
 
+src/main/antlr/*.tokens
+
 # End of https://www.gitignore.io/api/java,gradle,intellij,visualstudiocode

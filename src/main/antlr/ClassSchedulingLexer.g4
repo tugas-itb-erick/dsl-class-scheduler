@@ -34,14 +34,14 @@ UPDATE : U P D A T E;
 DELETE : D E L E T E;
 
 /* Entity */
+COURSE     : C O U R S E;
+COURSES    : C O U R S E S;
 FACILITY   : F A C I L I T Y;
 FACILITIES : F A C I L I T I E S;
 CLASSROOM  : C L A S S R O O M;
 CLASSROOMS : C L A S S R O O M S;
 CLASS      : C L A S S;
 CLASSES    : C L A S S E S;
-COURSE     : C O U R S E;
-COURSES    : C O U R S E S;
 TIMESLOT   : T I M E S L O T;
 TIMESLOTS  : T I M E S L O T S;
 
@@ -49,11 +49,14 @@ TIMESLOTS  : T I M E S L O T S;
 EQ                : '=';
 OPEN_PARENTHESIS  : '(';
 CLOSE_PARENTHESIS : ')';
+OPEN_BRACKET      : '[';
+CLOSE_BRACKET     : ']';
+COMMA             : ',';
 
 /* Preposition */
 AND           : A N D;
-SET           : S E T;
 WITH          : W I T H;
+SET           : S E T;
 END_STATEMENT : ';';
 
 fragment DIGIT       : [0-9];
@@ -64,13 +67,13 @@ fragment CHAR        : UNDERSCORE | ALPHA_LOWER | ALPHA_UPPER;
 fragment LETTER      : CHAR | DIGIT;
 fragment INT         : DIGIT+;
 
+/* PARAMS */
+//PREDICATE  : WITH PARAMS;
+//PARAMS     : PARAM NEXT_PARAM*;
+//NEXT_PARAM : AND PARAM;
+//PARAM      : WORD EQ VALUE;
+//VALUE      : INT | WORD;
+
 /* Whitespace */
 WS   : [ \t\r\n]+ -> channel(HIDDEN);
 WORD : LETTER+;
-
-/* PARAMS */
-//VALUE      : INT | WORD;
-//PARAM      : WORD EQ VALUE;
-//NEXT_PARAM : AND PARAM;
-//PARAMS     : PARAM NEXT_PARAM*;
-//PREDICATE  : WITH PARAMS;
