@@ -34,14 +34,18 @@ UPDATE : U P D A T E;
 DELETE : D E L E T E;
 
 /* Entity */
-FACILITY  : F A C I L I T Y;
-CLASSROOM : C L A S S R O O M;
+FACILITY   : F A C I L I T Y;
+CLASSROOM  : C L A S S R O O M;
+CLASSROOMS : C L A S S R O O M S;
+CLASS      : C L A S S;
+CLASSES    : C L A S S E S;
 
 /* OPERATOR */
 EQ : '=';
 
 /* Preposition */
 AND: A N D;
+SET: S E T;
 WITH: W I T H;
 END_STATEMENT: ';';
 
@@ -53,16 +57,15 @@ fragment CHAR        : UNDERSCORE | ALPHA_LOWER | ALPHA_UPPER;
 fragment LETTER      : CHAR | DIGIT;
 fragment INT  : DIGIT+;
 
-/* PARAMS */
-//PREDICATE  : WITH PARAMS;
-//PARAMS     : PARAM NEXT_PARAM*;
-//NEXT_PARAM : AND PARAM;
-//PARAM      : WORD EQ VALUE;
-//VALUE      : INT | WORD;
-
 /* Whitespace */
 WS : [ \t\r\n]+ -> channel(HIDDEN);
-
 WORD : LETTER+;
+
+/* PARAMS */
+//VALUE      : INT | WORD;
+//PARAM      : WORD EQ VALUE;
+//NEXT_PARAM : AND PARAM;
+//PARAMS     : PARAM NEXT_PARAM*;
+//PREDICATE  : WITH PARAMS;
 
 
