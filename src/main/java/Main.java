@@ -6,16 +6,16 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import java.io.InputStream;
 
-public class Hello {
+public class Main {
 
     public static void main(String args[]) throws Exception {
-        InputStream is = Hello.class.getResourceAsStream("hello.txt");
-        CharStream helloCharStream = CharStreams.fromStream(is);
-        HelloLexer lexer = new HelloLexer(helloCharStream);
+        InputStream is = Main.class.getResourceAsStream("test.txt");
+        CharStream stream = CharStreams.fromStream(is);
+        ClassSchedulingLexer lexer = new ClassSchedulingLexer(stream);
         CommonTokenStream tokens = new CommonTokenStream( lexer );
-        HelloParser parser = new HelloParser( tokens );
-        ParseTree tree = parser.r();
+        ClassSchedulingParser parser = new ClassSchedulingParser(tokens);
+        ParseTree tree = parser.createFacility();
         ParseTreeWalker walker = new ParseTreeWalker();
-        walker.walk( new HelloWalker(), tree );
+        walker.walk( new ClassSchedulingWalker(), tree );
     }
 }
