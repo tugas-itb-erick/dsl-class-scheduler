@@ -44,6 +44,8 @@ CLASS      : C L A S S;
 CLASSES    : C L A S S E S;
 TIMESLOT   : T I M E S L O T;
 TIMESLOTS  : T I M E S L O T S;
+LECTURER   : L E C T U R E R;
+LECTURERS  : L E C T U R E R S;
 
 /* OPERATOR */
 EQ                : '=';
