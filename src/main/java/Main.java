@@ -10,7 +10,7 @@ import java.io.InputStream;
 public class Main {
 
     public static void main(String args[]) throws Exception {
-        InputStream is = Main.class.getResourceAsStream("test.txt");
+        InputStream is = Main.class.getResourceAsStream("data.txt");
         CharStream stream = CharStreams.fromStream(is);
         ClassSchedulingLexer lexer = new ClassSchedulingLexer(stream);
         CommonTokenStream tokens = new CommonTokenStream( lexer );
@@ -31,7 +31,5 @@ public class Main {
                 courseRepository,
                 lecturerRepository,
                 timeSlotRepository), tree);
-
-
     }
 }

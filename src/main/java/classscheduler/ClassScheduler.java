@@ -1,7 +1,10 @@
 package classscheduler;
 
-import classscheduler.models.*;
-import classscheduler.models.enums.Day;
+import classscheduler.enums.Day;
+import classscheduler.models.Classroom;
+import classscheduler.models.DayHour;
+import classscheduler.models.Schedule;
+import classscheduler.enums.Day;
 import classscheduler.repositories.*;
 
 import java.util.ArrayList;
