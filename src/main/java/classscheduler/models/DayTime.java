@@ -1,5 +1,6 @@
 package classscheduler.models;
 
+import classscheduler.models.enums.Day;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,11 +12,13 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class Lecturer {
+public class DayTime {
 
-    private String employeeId;
+    private Day day;
 
-    private String name;
+    private List<Integer> times;
 
-    private List<DayTime> availability;
+    private void addTime(int time) {
+        times.add(time);
+    }
 }
