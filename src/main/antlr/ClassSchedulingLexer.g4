@@ -59,7 +59,6 @@ fragment LETTER      : CHAR | DIGIT;
 fragment INT         : DIGIT+;
 
 /* Whitespace */
-RET   : [\n]+;
 TAB   : [\t]+;
-WS    : [ \r]+ -> channel(HIDDEN);
+WS    : [ \r\n]+ -> channel(HIDDEN);
 WORD  : LETTER+;

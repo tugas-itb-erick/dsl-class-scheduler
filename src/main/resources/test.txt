@@ -1,28 +1,29 @@
 Lecturer:
-	id: 123456
-	name: Yudis
-	preferred_course: IF4031 IF4150
-	not_preferred_times:
-		monday: 7 8 9
-		tuesday: 13 14 15
+    id: 123456
+    name: Yudis
+    preferred_course: IF4031 IF4150
+    not_preferred_times:
+        monday: 7 8 9
+        tuesday: 13 14 15
 
 Course:
-	id: IF4150
-	name: RPLSD
-	credits: 2
-	classes: K1 K2
+    id: IF4150
+    name: RPLSD
+    credits: 2
+    classes: K1 K2
+    facilities: papan_tulis lcd
 
 Classroom:
-	id: 7601
-	capacity: 90
-	facilities: papan_tulis lcd recel kura-kura
+    id: 7601
+    capacity: 90
+    facilities: papan_tulis lcd recel kura-kura
 
 Class:
-	course_id: IF4150
-	name: K1
-	quota: 50
+    course_id: IF4150
+    name: K1
+    quota: 50
 
 Class:
-	course_id: IF4150
-	name: K2
-	quota: 60
+    course_id: IF4150
+    name: K2
+    quota: 60

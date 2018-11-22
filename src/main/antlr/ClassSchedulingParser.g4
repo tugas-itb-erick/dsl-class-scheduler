@@ -2,8 +2,20 @@ parser grammar ClassSchedulingParser;
 
 options {tokenVocab=ClassSchedulingLexer;}
 
+key
+	: WORD;
+
+value
+	: (WORD)* | map;
+
+map
+	: key COLON value;
+
+line
+	: (TAB)* map;
+
 createParam
-	: (RET TAB WORD COLON (WORD (WORD)*)* (RET TAB TAB WORD COLON (COMMA WORD)*)*)+;
+	: line+;
 
 // Course
 createCourse
@@ -22,4 +34,4 @@ createLecturer
     : LECTURER COLON createParam;
 
 file
-	: ((createCourse | createClass | createClassroom | createLecturer) RET)*;
+	: (createCourse | createClass | createClassroom | createLecturer)*;
