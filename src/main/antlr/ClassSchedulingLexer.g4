@@ -26,26 +26,15 @@ fragment W : [wW];
 fragment X : [xX];
 fragment Y : [yY];
 fragment Z : [zZ];
-
-/* CRUD */
-CREATE : C R E A T E;
-SHOW   : S H O W;
-UPDATE : U P D A T E;
-DELETE : D E L E T E;
+COLONS     : ':';
 
 /* Entity */
 COURSE     : C O U R S E;
-COURSES    : C O U R S E S;
 FACILITY   : F A C I L I T Y;
-FACILITIES : F A C I L I T I E S;
 CLASSROOM  : C L A S S R O O M;
-CLASSROOMS : C L A S S R O O M S;
 CLASS      : C L A S S;
-CLASSES    : C L A S S E S;
 TIMESLOT   : T I M E S L O T;
-TIMESLOTS  : T I M E S L O T S;
 LECTURER   : L E C T U R E R;
-LECTURERS  : L E C T U R E R S;
 
 /* OPERATOR */
 EQ                : '=';
@@ -69,13 +58,8 @@ fragment CHAR        : UNDERSCORE | ALPHA_LOWER | ALPHA_UPPER;
 fragment LETTER      : CHAR | DIGIT;
 fragment INT         : DIGIT+;
 
-/* PARAMS */
-//PREDICATE  : WITH PARAMS;
-//PARAMS     : PARAM NEXT_PARAM*;
-//NEXT_PARAM : AND PARAM;
-//PARAM      : WORD EQ VALUE;
-//VALUE      : INT | WORD;
-
 /* Whitespace */
-WS   : [ \t\r\n]+ -> channel(HIDDEN);
-WORD : LETTER+;
+RET   : [\n]+;
+TAB   : [\t]+;
+WS    : [ \r]+ -> channel(HIDDEN);
+WORD  : LETTER+;

@@ -18,11 +18,11 @@ Classroom:
     facilities: papan_tulis lcd recel kura-kura
 
 Class:
-    course: IF4150
+    course_id: IF4150
     name: K1
     quota: 50
 
 Class:
-    course: IF4150
+    course_id: IF4150
     name: K2
     quota: 60
