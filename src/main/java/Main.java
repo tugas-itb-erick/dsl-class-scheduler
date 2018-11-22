@@ -29,7 +29,6 @@ public class Main {
                 classroomRepository,
                 clazzRepository,
                 courseRepository,
-                lecturerRepository,
-                timeSlotRepository), tree);
+                lecturerRepository), tree);
     }
 }
