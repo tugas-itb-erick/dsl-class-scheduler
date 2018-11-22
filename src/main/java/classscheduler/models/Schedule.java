@@ -1,12 +1,11 @@
 package classscheduler.models;
 
-import javafx.util.Pair;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -33,11 +32,31 @@ public class Schedule {
         }
     }
 
+    public List<Classroom> getAllClassroomsInDayHour(DayHour dayHour) {
+        List<Session> sessionList = sessions.get(dayHour);
+        if (sessionList != null) {
+            return sessionList.stream().map(Session::getClassroom).collect(Collectors.toList());
+        }
+        return new ArrayList<>();
+    }
+
     public boolean isClassroomExist(DayHour dayHour, String classroomId) {
         List<Session> sessionList = sessions.get(dayHour);
         if (sessionList != null) {
             for (Session session: sessionList) {
                 if (session.getClassroom().getId().equals(classroomId)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean isLecturerExist(DayHour dayHour, String lecturerId) {
+        List<Session> sessionList = sessions.get(dayHour);
+        if (sessionList != null) {
+            for (Session session: sessionList) {
+                if (session.getClazz().getLecturerId().equals(lecturerId)) {
                     return true;
                 }
             }
