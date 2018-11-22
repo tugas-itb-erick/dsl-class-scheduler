@@ -12,25 +12,21 @@ import java.util.*;
 @ToString
 public class ClazzRepository {
 
-    private HashMap<String, Clazz> classes;
+    private List<Clazz> classes; // jgn pake map yg ini
 
     public ClazzRepository() {
-        this.classes = new HashMap<>();
+        this.classes = new ArrayList<>();
     }
 
     public ClazzRepository(Clazz[] classes) {
-        this.classes = new HashMap<>();
-        Arrays.stream(classes).forEach(clazz -> this.classes.put(
-                clazz.getCourseId() + "|" + clazz.getName(), clazz));
+        this.classes = Arrays.asList(classes);
     }
 
     public ClazzRepository(Collection<Clazz> classes) {
-        this.classes = new HashMap<>();
-        classes.forEach(clazz -> this.classes.put(
-                clazz.getCourseId() + "|" + clazz.getName(), clazz));
+        this.classes = new ArrayList<>(classes);
     }
 
     public void addClazz(Clazz clazz) {
-        this.classes.put(clazz.getCourseId() + "|" + clazz.getName(), clazz);
+        this.classes.add(clazz);
     }
 }
