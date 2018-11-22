@@ -2,7 +2,9 @@ import classscheduler.models.Clazz;
 import classscheduler.models.Course;
 import classscheduler.models.DayTime;
 import classscheduler.models.Lecturer;
+import classscheduler.models.enums.Day;
 import classscheduler.repositories.*;
+import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,42 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
     }
 
     public void createLecturer(List<ClassSchedulingParser.CreateLecturerContext> ctx) {
+    	for (ClassSchedulingParser.CreateLecturerContext context : ctx) {
+			String id = "";
+			String name = "";
+			List<DayTime> notPreferredTimes = new ArrayList<DayTime>();
+			List<String> preferredCourses = new ArrayList<String>();
+
+    		for (ClassSchedulingParser.LineContext line : context.createParam().line()) {
+				switch (line.map().key().WORD().toString()) {
+					case "id":
+						id = line.map().value().WORD(0).toString();
+						break;
+					case "name":
+						for (TerminalNode word : line.map().value().WORD()) {
+							name = name + " " + word.toString();
+						}
+						break;
+					case "preferred_courses":
+						for (TerminalNode word : line.map().value().WORD()) {
+							preferredCourses.add(word.toString());
+						}
+						break;
+					case "not_preferred_times":
+						for (ClassSchedulingParser.MapContext map : line.map().value().map()) {
+							Day day = Day.valueOf(map.key().WORD().toString().toUpperCase());
+							List<Integer> times = new ArrayList<>();
+							for (TerminalNode word : map.value().WORD()) {
+								times.add(Integer.parseInt(word.toString()));
+							}
+							notPreferredTimes.add(new DayTime(day, times));
+						}
+						break;
+				}
+			}
+
+    		lecturerRepository.addLecturer(new Lecturer(id, name, notPreferredTimes, preferredCourses));
+		}
     }
 
     public void createClassroom(List<ClassSchedulingParser.CreateClassroomContext> ctx) {

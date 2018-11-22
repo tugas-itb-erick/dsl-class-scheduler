@@ -32,6 +32,7 @@ public class Main {
                 lecturerRepository,
                 timeSlotRepository), tree);
 
-
+		System.out.println(lecturerRepository.getLecturers().get("123456"));
+		System.out.println(lecturerRepository.getLecturers().get("123"));
     }
 }
