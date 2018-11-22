@@ -14,7 +14,7 @@ public class Main {
         ClassSchedulingLexer lexer = new ClassSchedulingLexer(stream);
         CommonTokenStream tokens = new CommonTokenStream( lexer );
         ClassSchedulingParser parser = new ClassSchedulingParser(tokens);
-        ParseTree tree = parser.createFacility();
+        ParseTree tree = parser.createClass();
         ParseTreeWalker walker = new ParseTreeWalker();
         walker.walk( new ClassSchedulingWalker(), tree );
     }
