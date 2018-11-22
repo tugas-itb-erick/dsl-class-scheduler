@@ -1,4 +1,8 @@
 import classscheduler.models.Classroom;
+import classscheduler.models.Clazz;
+import classscheduler.models.Course;
+import classscheduler.models.DayTime;
+import classscheduler.models.Lecturer;
 import classscheduler.repositories.*;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
@@ -59,8 +63,56 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
     }
 
     public void createClass(List<ClassSchedulingParser.CreateClassContext> ctx) {
+    	for (ClassSchedulingParser.CreateClassContext createClassContext : ctx) {
+			String name = "";
+			String courseId = "";
+			int quota = 0;
+			String lecturerId = "";
+			for (ClassSchedulingParser.LineContext lineContext : createClassContext.createParam().line()) {
+				switch (lineContext.map().key().WORD().toString()) {
+					case "name":
+						name = lineContext.map().value().WORD(0).toString();
+						break;
+					case "course_id":
+						courseId = lineContext.map().value().WORD(0).toString();
+						break;
+					case "quota":
+						quota = Integer.parseInt(lineContext.map().value().WORD(0).toString());
+						break;
+					case "lecturer_id":
+						lecturerId = lineContext.map().value().WORD(0).toString();
+						break;
+				}
+			}
+			Clazz clazz = new Clazz(name, courseId, quota, lecturerId);
+			clazzRepository.addClazz(clazz);
+		}
     }
 
     public void createCourse(List<ClassSchedulingParser.CreateCourseContext> ctx) {
+    	for (ClassSchedulingParser.CreateCourseContext createCourseContext : ctx) {
+			String id = "";
+			String name = "";
+			int credits = 0;
+			List<String> facilities = new ArrayList<>();
+			for (ClassSchedulingParser.LineContext lineContext : createCourseContext.createParam().line()) {
+				switch (lineContext.map().key().WORD().toString()) {
+					case "id":
+						id = lineContext.map().value().WORD(0).toString();
+						break;
+					case "name":
+						name = lineContext.map().value().WORD(0).toString();
+						break;
+					case "credits":
+						credits = Integer.parseInt(lineContext.map().value().WORD(0).toString());
+						break;
+					case "facilities":
+						lineContext.map().value().WORD().forEach(word -> facilities.add(word.toString()));
+						break;
+				}
+			}
+			Course course = new Course(id, name, credits, facilities);
+			courseRepository.addCourse(course);
+		}
     }
 }

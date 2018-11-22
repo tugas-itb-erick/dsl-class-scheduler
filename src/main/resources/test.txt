@@ -10,7 +10,6 @@ Course:
     id: IF4150
     name: RPLSD
     credits: 2
-    classes: K1 K2
     facilities: papan_tulis lcd
 
 Classroom:
@@ -27,8 +26,10 @@ Class:
     course_id: IF4150
     name: K1
     quota: 50
+    lecturer_id: 123456
 
 Class:
     course_id: IF4150
     name: K2
     quota: 60
+    lecturer_id: 654321
