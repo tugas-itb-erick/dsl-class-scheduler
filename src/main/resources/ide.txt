@@ -1,18 +1,28 @@
-Classroom {
-    code: 7601, capacity: 50, facilities: [papan, meja, dll];
-    code: 7602, capacity: 10;
-    code: 7603, capacity: 66, facilities: [lcd];
-}
+Lecturer:
+    id: 123456
+    name: Yudis
+    preferred_course: IF4031 IF4150
+    not_preferred_times:
+        monday: 7 8 9
+        tuesday: 13 14 15
 
-Course {
-    code: IF1234, name: RSPDL, credit: 2,
-    class: {
+Course:
+    id: IF4150
+    name: RPLSD
+    credits: 2
+    classes: K1 K2
 
-    };
-}
+Classroom:
+    id: 7601
+    capacity: 90
+    facilities: papan_tulis lcd recel kura-kura
 
-Lecturer {
-    employee_id: 12340, name: erick;
-    employee_id: 12341, name: wijaya;
-    employee_id: 12342, name: kusuma;
-}
+Class:
+    course: IF4150
+    name: K1
+    quota: 50
+
+Class:
+    course: IF4150
+    name: K2
+    quota: 60
