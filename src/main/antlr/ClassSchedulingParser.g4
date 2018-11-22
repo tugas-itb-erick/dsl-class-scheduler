@@ -7,16 +7,16 @@ createParam
 
 // Course
 createCourse
-    : COURSE COLONS createParam END_STATEMENT;
+    : COURSE COLONS createParam;
 
 // Class
 createClass
-    : CLASS COLONS createParam END_STATEMENT;
+    : CLASS COLONS createParam;
 
 // Classroom
 createClassroom
-    : CLASSROOM createParam END_STATEMENT;
+    : CLASSROOM createParam;
 
 // Lecturer
 createLecturer
-    : LECTURER COLONS createParam END_STATEMENT;
+    : LECTURER COLONS createParam;
