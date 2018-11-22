@@ -1,4 +1,8 @@
+import classscheduler.models.DayTime;
+import classscheduler.models.Lecturer;
 import classscheduler.repositories.*;
+
+import java.util.List;
 
 public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
     private ClassroomRepository classroomRepository;
@@ -19,7 +23,25 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
         this.timeSlotRepository = timeSlotRepository;
     }
 
-    public void exitCreateLecturer(ClassSchedulingParser.CreateLecturerContext ctx) {
-//        ctx.createParam().;
+    public void exitFile(ClassSchedulingParser.FileContext ctx) {
+        createLecturer(ctx.createLecturer());
+//        for (int i = 0; i < ctx.createLecturer().size(); i++) {
+//            String id;
+//            String name;
+//            List<DayTime> notPreferredTimes =
+//            ctx.createLecturer(i).createParam()
+//        }
+    }
+
+    public void createLecturer(List<ClassSchedulingParser.CreateLecturerContext> ctx) {
+    }
+
+    public void createClassroom(List<ClassSchedulingParser.CreateClassroomContext> ctx) {
+    }
+
+    public void createClass(List<ClassSchedulingParser.CreateClassContext> ctx) {
+    }
+
+    public void createCourse(List<ClassSchedulingParser.CreateCourseContext> ctx) {
     }
 }
