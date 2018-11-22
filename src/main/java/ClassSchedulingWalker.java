@@ -25,12 +25,9 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
 
     public void exitFile(ClassSchedulingParser.FileContext ctx) {
         createLecturer(ctx.createLecturer());
-//        for (int i = 0; i < ctx.createLecturer().size(); i++) {
-//            String id;
-//            String name;
-//            List<DayTime> notPreferredTimes =
-//            ctx.createLecturer(i).createParam()
-//        }
+        createClassroom(ctx.createClassroom());
+        createClass(ctx.createClass());
+		createCourse(ctx.createCourse());
     }
 
     public void createLecturer(List<ClassSchedulingParser.CreateLecturerContext> ctx) {
