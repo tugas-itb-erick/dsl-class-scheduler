@@ -37,8 +37,7 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
     	for (ClassSchedulingParser.CreateLecturerContext context : ctx) {
 			String id = "";
 			String name = "";
-			List<DayTime> notPreferredTimes = new ArrayList<>();
-			List<String> preferredCourses = new ArrayList<>();
+			List<DayTime> preferredTimes = new ArrayList<>();
 
     		for (ClassSchedulingParser.LineContext line : context.createParam().line()) {
 				switch (line.map().key().WORD().toString()) {
@@ -48,21 +47,18 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
 					case "name":
 						name = line.map().value().WORD().stream().map(word -> word.toString()).collect(Collectors.joining(" "));
 						break;
-					case "preferred_courses":
-						line.map().value().WORD().forEach(word -> preferredCourses.add(word.toString().replace("_", " ")));
-						break;
-					case "not_preferred_times":
+					case "preferred_times":
 						line.map().value().map().forEach(map -> {
 							Day day = Day.valueOf(map.key().WORD().toString().toUpperCase());
 							List<Integer> times = new ArrayList<>();
 							map.value().WORD().forEach(time -> times.add(Integer.parseInt(time.toString())));
-							notPreferredTimes.add(new DayTime(day, times));
+							preferredTimes.add(new DayTime(day, times));
 						});
 						break;
 				}
 			}
 
-			Lecturer lecturer = new Lecturer(id, name, notPreferredTimes, preferredCourses);
+			Lecturer lecturer = new Lecturer(id, name, preferredTimes);
     		lecturerRepository.addLecturer(lecturer);
 		}
     }
