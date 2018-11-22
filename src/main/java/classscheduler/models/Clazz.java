@@ -16,4 +16,6 @@ public class Clazz {
     private String courseId;
 
     private int quota;
+
+    private String lecturerId;
 }

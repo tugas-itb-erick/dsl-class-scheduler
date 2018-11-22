@@ -1,3 +1,4 @@
+import classscheduler.repositories.*;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -14,8 +15,21 @@ public class Main {
         ClassSchedulingLexer lexer = new ClassSchedulingLexer(stream);
         CommonTokenStream tokens = new CommonTokenStream( lexer );
         ClassSchedulingParser parser = new ClassSchedulingParser(tokens);
+
+        ClassroomRepository classroomRepository = new ClassroomRepository();
+        ClazzRepository clazzRepository = new ClazzRepository();
+        CourseRepository courseRepository = new CourseRepository();
+        LecturerRepository lecturerRepository = new LecturerRepository();
+        TimeSlotRepository timeSlotRepository = new TimeSlotRepository();
+
         ParseTree tree = parser.createClass();
         ParseTreeWalker walker = new ParseTreeWalker();
-        walker.walk( new ClassSchedulingWalker(), tree );
+
+        walker.walk(new ClassSchedulingWalker(
+                classroomRepository,
+                clazzRepository,
+                courseRepository,
+                lecturerRepository,
+                timeSlotRepository), tree);
     }
 }
