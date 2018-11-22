@@ -63,7 +63,6 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
 			}
 
 			Lecturer lecturer = new Lecturer(id, name, notPreferredTimes, preferredCourses);
-    		System.out.println(lecturer);
     		lecturerRepository.addLecturer(lecturer);
 		}
     }
@@ -86,7 +85,6 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
                 }
             }
             Classroom classroom = new Classroom(id, capacity, facilities);
-			System.out.println(classroom);
             classroomRepository.addClassroom(classroom);
         }
     }
@@ -114,7 +112,6 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
 				}
 			}
 			Clazz clazz = new Clazz(name, courseId, quota, lecturerId);
-			System.out.println(clazz);
 			clazzRepository.addClazz(clazz);
 		}
     }
@@ -142,7 +139,6 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
 				}
 			}
 			Course course = new Course(id, name, credits, facilities);
-			System.out.println(course);
 			courseRepository.addCourse(course);
 		}
     }
