@@ -1,6 +1,6 @@
 package classscheduler.models;
 
-import classscheduler.models.enums.Day;
+import classscheduler.enums.Day;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,5 @@
 package classscheduler.models;
 
-import javafx.util.Pair;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +7,7 @@ import lombok.ToString;
 
 import java.util.*;
 
+@AllArgsConstructor
 @Getter
 @Setter
 @ToString

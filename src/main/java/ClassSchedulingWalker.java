@@ -3,7 +3,7 @@ import classscheduler.models.Clazz;
 import classscheduler.models.Course;
 import classscheduler.models.DayTime;
 import classscheduler.models.Lecturer;
-import classscheduler.models.enums.Day;
+import classscheduler.enums.Day;
 import classscheduler.repositories.*;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
@@ -15,7 +15,6 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
     private ClazzRepository clazzRepository;
     private CourseRepository courseRepository;
     private LecturerRepository lecturerRepository;
-    private TimeSlotRepository timeSlotRepository;
 
     public ClassSchedulingWalker(ClassroomRepository classroomRepository,
                                  ClazzRepository clazzRepository,
@@ -26,7 +25,6 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
         this.clazzRepository = clazzRepository;
         this.courseRepository = courseRepository;
         this.lecturerRepository = lecturerRepository;
-        this.timeSlotRepository = timeSlotRepository;
     }
 
     public void exitFile(ClassSchedulingParser.FileContext ctx) {
