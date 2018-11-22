@@ -1,7 +1,7 @@
 Lecturer:
     id: 123456
     name: Yudis
-    preferred_course: IF4031 IF4150
+    preferred_courses: IF4031 IF4150
     not_preferred_times:
         monday: 7 8 9
         tuesday: 13 14 15
@@ -28,3 +28,11 @@ Class:
     name: K2
     quota: 60
     lecturer_id: 654321
+
+Lecturer:
+    id: 123
+    name: Yudis
+    preferred_courses: IF4030 IF4150
+    not_preferred_times:
+        monday: 4 8 9
+        tuesday: 12 14 15
