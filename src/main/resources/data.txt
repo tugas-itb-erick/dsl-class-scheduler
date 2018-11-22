@@ -8,19 +8,67 @@ Lecturer:
 
 Course:
     id: IF4150
-    name: RPLSD
+    name: Rekayasa Perangkat Lunak Spesifik Domain
     credits: 2
     facilities: papan_tulis lcd
+
+Course:
+    id: IF4070
+    name: 	Representasi Pengetahuan dan Penalaran
+    credits: 3
+    facilities: papan_tulis lcd laptop
+
+Course:
+    id: IF4071
+    name: Pembelajaran Mesin
+    credits: 3
+    facilities: papan_tulis lcd pc
+
+Course:
+    id: IF4072
+    name: Pemrosesan Text dan Suara Bahasa Alami
+    credits: 3
+    facilities: papan_tulis lcd microphone pc
+
+Course:
+    id: IF4090
+    name: Kerja Praktek
+    credits: 3
 
 Classroom:
     id: 7601
     capacity: 90
-    facilities: papan_tulis lcd recel kura-kura
+    facilities: papan_tulis lcd pc microphone
 
 Classroom:
     id: 7606
     capacity: 50
-    facilities: papan_tulis lcd pc microphone
+    facilities: papan_tulis lcd laptop microphone
+
+Classroom:
+    id: 7609
+    capacity: 40
+    facilities: papan_tulis lcd microphone
+
+Classroom:
+    id: 7610
+    capacity: 40
+    facilities: papan_tulis lcd microphone
+
+Classroom:
+    id: 7608
+    capacity: 60
+    facilities: papan_tulis lcd laptop microphone
+
+Classroom:
+    id: 7603
+    capacity: 40
+    facilities: papan_tulis lcd laptop
+
+Classroom:
+    id: 7604
+    capacity: 40
+    facilities: papan_tulis lcd laptop
 
 Class:
     course_id: IF4150
