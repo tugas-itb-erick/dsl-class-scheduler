@@ -22,7 +22,7 @@ public class Main {
         LecturerRepository lecturerRepository = new LecturerRepository();
         TimeSlotRepository timeSlotRepository = new TimeSlotRepository();
 
-        ParseTree tree = parser.createClass();
+        ParseTree tree = parser.createLecturer();
         ParseTreeWalker walker = new ParseTreeWalker();
 
         walker.walk(new ClassSchedulingWalker(
@@ -31,5 +31,7 @@ public class Main {
                 courseRepository,
                 lecturerRepository,
                 timeSlotRepository), tree);
+
+
     }
 }

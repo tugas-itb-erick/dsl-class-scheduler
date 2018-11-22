@@ -3,7 +3,7 @@ parser grammar ClassSchedulingParser;
 options {tokenVocab=ClassSchedulingLexer;}
 
 createParam
-    : (RET TAB WORD COLONS (WORD (WORD)*)* (RET TAB TAB WORD COLONS (COMMA WORD)*)*)+;
+	: (RET TAB WORD COLONS (WORD (WORD)*)* (RET TAB TAB WORD COLONS (COMMA WORD)*)*)+;
 
 // Course
 createCourse

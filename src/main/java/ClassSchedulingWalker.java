@@ -19,8 +19,7 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
         this.timeSlotRepository = timeSlotRepository;
     }
 
-//    public void enterCreateFacility(ClassSchedulingParser.CreateFacilityContext ctx) {
-//        System.out.println(ctx.CREATE());
-//        System.out.println(ctx);
-//    }
+    public void exitCreateLecturer(ClassSchedulingParser.CreateLecturerContext ctx) {
+        ctx.createParam().WORD();
+    }
 }

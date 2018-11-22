@@ -26,7 +26,6 @@ fragment W : [wW];
 fragment X : [xX];
 fragment Y : [yY];
 fragment Z : [zZ];
-COLONS     : ':';
 
 /* Entity */
 COURSE     : C O U R S E;
@@ -43,6 +42,7 @@ CLOSE_PARENTHESIS : ')';
 OPEN_BRACKET      : '[';
 CLOSE_BRACKET     : ']';
 COMMA             : ',';
+COLONS            : ':';
 
 /* Preposition */
 AND           : A N D;
