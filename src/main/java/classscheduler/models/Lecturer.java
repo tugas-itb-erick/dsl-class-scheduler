@@ -13,9 +13,11 @@ import java.util.List;
 @ToString
 public class Lecturer {
 
-    private String employeeId;
+    private String id;
 
     private String name;
 
-    private List<DayTime> availability;
+    private List<DayTime> not_preferred_times;
+
+    private List<String> preferred_courses;
 }

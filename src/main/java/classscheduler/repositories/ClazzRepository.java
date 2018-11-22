@@ -5,31 +5,32 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Getter
 @Setter
 @ToString
 public class ClazzRepository {
 
-    private List<Clazz> classes;
+    private HashMap<String, Clazz> classes;
 
     public ClazzRepository() {
-        this.classes = new ArrayList<>();
+        this.classes = new HashMap<>();
     }
 
     public ClazzRepository(Clazz[] classes) {
-        this.classes = new ArrayList<>(Arrays.asList(classes));
+        this.classes = new HashMap<>();
+        Arrays.stream(classes).forEach(clazz -> this.classes.put(
+                clazz.getCourseId() + "_" + clazz.getName(), clazz));
     }
 
     public ClazzRepository(Collection<Clazz> classes) {
-        this.classes = new ArrayList<>(classes);
+        this.classes = new HashMap<>();
+        classes.forEach(clazz -> this.classes.put(
+                clazz.getCourseId() + "_" + clazz.getName(), clazz));
     }
 
-    public void addClazz(Clazz classes) {
-        this.classes.add(classes);
+    public void addClazz(Clazz clazz) {
+        this.classes.put(clazz.getCourseId() + "_" + clazz.getName(), clazz);
     }
 }
