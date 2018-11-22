@@ -21,16 +21,16 @@ public class ClazzRepository {
     public ClazzRepository(Clazz[] classes) {
         this.classes = new HashMap<>();
         Arrays.stream(classes).forEach(clazz -> this.classes.put(
-                clazz.getCourseId() + "_" + clazz.getName(), clazz));
+                clazz.getCourseId() + "|" + clazz.getName(), clazz));
     }
 
     public ClazzRepository(Collection<Clazz> classes) {
         this.classes = new HashMap<>();
         classes.forEach(clazz -> this.classes.put(
-                clazz.getCourseId() + "_" + clazz.getName(), clazz));
+                clazz.getCourseId() + "|" + clazz.getName(), clazz));
     }
 
     public void addClazz(Clazz clazz) {
-        this.classes.put(clazz.getCourseId() + "_" + clazz.getName(), clazz);
+        this.classes.put(clazz.getCourseId() + "|" + clazz.getName(), clazz);
     }
 }
