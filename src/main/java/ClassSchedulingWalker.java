@@ -20,6 +20,6 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
     }
 
     public void exitCreateLecturer(ClassSchedulingParser.CreateLecturerContext ctx) {
-        ctx.createParam().WORD();
+//        ctx.createParam().;
     }
 }

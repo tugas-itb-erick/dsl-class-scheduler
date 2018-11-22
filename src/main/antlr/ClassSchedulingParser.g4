@@ -3,20 +3,23 @@ parser grammar ClassSchedulingParser;
 options {tokenVocab=ClassSchedulingLexer;}
 
 createParam
-	: (RET TAB WORD COLONS (WORD (WORD)*)* (RET TAB TAB WORD COLONS (COMMA WORD)*)*)+;
+	: (RET TAB WORD COLON (WORD (WORD)*)* (RET TAB TAB WORD COLON (COMMA WORD)*)*)+;
 
 // Course
 createCourse
-    : COURSE COLONS createParam;
+    : COURSE COLON createParam;
 
 // Class
 createClass
-    : CLASS COLONS createParam;
+    : CLASS COLON createParam;
 
 // Classroom
 createClassroom
-    : CLASSROOM createParam;
+    : CLASSROOM COLON createParam;
 
 // Lecturer
 createLecturer
-    : LECTURER COLONS createParam;
+    : LECTURER COLON createParam;
+
+file
+	: ((createCourse | createClass | createClassroom | createLecturer) RET)*;

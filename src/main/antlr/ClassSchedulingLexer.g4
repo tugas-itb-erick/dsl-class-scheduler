@@ -26,6 +26,7 @@ fragment W : [wW];
 fragment X : [xX];
 fragment Y : [yY];
 fragment Z : [zZ];
+COLON      : ':';
 
 /* Entity */
 COURSE     : C O U R S E;
@@ -42,19 +43,18 @@ CLOSE_PARENTHESIS : ')';
 OPEN_BRACKET      : '[';
 CLOSE_BRACKET     : ']';
 COMMA             : ',';
-COLONS            : ':';
 
 /* Preposition */
 AND           : A N D;
 WITH          : W I T H;
 SET           : S E T;
-END_STATEMENT : ';';
 
 fragment DIGIT       : [0-9];
 fragment ALPHA_LOWER : [a-z];
 fragment ALPHA_UPPER : [A-Z];
 fragment UNDERSCORE  : '_';
-fragment CHAR        : UNDERSCORE | ALPHA_LOWER | ALPHA_UPPER;
+fragment DASH		 : '-';
+fragment CHAR        : UNDERSCORE | ALPHA_LOWER | ALPHA_UPPER | DASH;
 fragment LETTER      : CHAR | DIGIT;
 fragment INT         : DIGIT+;
 
