@@ -6,7 +6,7 @@ key
 	: WORD;
 
 value
-	: (WORD)* | map;
+	: (WORD)+ | (map)+;
 
 map
 	: key COLON value;
