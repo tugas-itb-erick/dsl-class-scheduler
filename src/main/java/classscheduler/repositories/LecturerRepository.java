@@ -1,6 +1,6 @@
-package classscheduler.repo;
+package classscheduler.repositories;
 
-import classscheduler.model.Lecturer;
+import classscheduler.models.Lecturer;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,19 +13,19 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class LecturerRepo {
+public class LecturerRepository {
 
     private List<Lecturer> lecturers;
 
-    public LecturerRepo() {
+    public LecturerRepository() {
         lecturers = new ArrayList<>();
     }
 
-    public LecturerRepo(Lecturer[] lecturers) {
+    public LecturerRepository(Lecturer[] lecturers) {
         this.lecturers = new ArrayList<>(Arrays.asList(lecturers));
     }
 
-    public LecturerRepo(Collection<Lecturer> lecturers) {
+    public LecturerRepository(Collection<Lecturer> lecturers) {
         this.lecturers = new ArrayList<>(lecturers);
     }
 

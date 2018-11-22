@@ -1,19 +1,17 @@
-package classscheduler.model;
+package classscheduler.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @AllArgsConstructor
 @Getter
 @Setter
-public class Classroom {
+public class Course {
 
     private String id;
 
-    private int capacity;
+    private String name;
 
-    private List<String> facilities;
+    private int credit;
 }
