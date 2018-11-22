@@ -5,31 +5,30 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Getter
 @Setter
 @ToString
 public class LecturerRepository {
 
-    private List<Lecturer> lecturers;
+    private HashMap<String, Lecturer> lecturers;
 
     public LecturerRepository() {
-        lecturers = new ArrayList<>();
+        lecturers = new HashMap<>();
     }
 
     public LecturerRepository(Lecturer[] lecturers) {
-        this.lecturers = new ArrayList<>(Arrays.asList(lecturers));
+        this.lecturers = new HashMap<>();
+        Arrays.stream(lecturers).forEach(lecturer -> this.lecturers.put(lecturer.getId(), lecturer));
     }
 
     public LecturerRepository(Collection<Lecturer> lecturers) {
-        this.lecturers = new ArrayList<>(lecturers);
+        this.lecturers = new HashMap<>();
+        lecturers.forEach(lecturer -> this.lecturers.put(lecturer.getId(), lecturer));
     }
 
     public void addLecturer(Lecturer lecturer) {
-        lecturers.add(lecturer);
+        lecturers.put(lecturer.getId(), lecturer);
     }
 }
