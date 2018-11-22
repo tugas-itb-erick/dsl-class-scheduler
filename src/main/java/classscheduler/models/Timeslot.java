@@ -1,4 +1,4 @@
-package classscheduler.model;
+package classscheduler.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
