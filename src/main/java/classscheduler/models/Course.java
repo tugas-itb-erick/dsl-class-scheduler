@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 @AllArgsConstructor
 @Getter
 @Setter
@@ -16,4 +18,6 @@ public class Course {
     private String name;
 
     private int credits;
+
+    private List<String> facilities;
 }
