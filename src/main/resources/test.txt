@@ -36,7 +36,7 @@ Class:
 
 Lecturer:
     id: 123
-    name: Yudis
+    name: Adi
     preferred_courses: IF4030 IF4150
     not_preferred_times:
         monday: 4 8 9
