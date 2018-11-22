@@ -18,6 +18,11 @@ Classroom:
     capacity: 90
     facilities: papan_tulis lcd recel kura-kura
 
+Classroom:
+    id: 7606
+    capacity: 50
+    facilities: papan_tulis lcd pc microphone
+
 Class:
     course_id: IF4150
     name: K1
