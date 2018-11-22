@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Timeslot {
+public class TimeSlot {
 
     private String courseId;
 

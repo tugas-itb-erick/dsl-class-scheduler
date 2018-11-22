@@ -17,7 +17,7 @@ public class Lecturer {
 
     private String name;
 
-    private List<DayTime> not_preferred_times;
+    private List<DayTime> notPreferredTimes;
 
-    private List<String> preferred_courses;
+    private List<String> preferredCourses;
 }

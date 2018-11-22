@@ -1,6 +1,6 @@
 package classscheduler.repositories;
 
-import classscheduler.models.Timeslot;
+import classscheduler.models.TimeSlot;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,23 +13,23 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class TimeslotRepository {
+public class TimeSlotRepository {
 
-    private List<Timeslot> timeslots;
+    private List<TimeSlot> timeSlots;
 
-    public TimeslotRepository() {
-        this.timeslots = new ArrayList<>();
+    public TimeSlotRepository() {
+        this.timeSlots = new ArrayList<>();
     }
 
-    public TimeslotRepository(Timeslot[] timeslots) {
-        this.timeslots = new ArrayList<>(Arrays.asList(timeslots));
+    public TimeSlotRepository(TimeSlot[] timeSlots) {
+        this.timeSlots = new ArrayList<>(Arrays.asList(timeSlots));
     }
 
-    public TimeslotRepository(Collection<Timeslot> timeslots) {
-        this.timeslots = new ArrayList<>(timeslots);
+    public TimeSlotRepository(Collection<TimeSlot> timeSlots) {
+        this.timeSlots = new ArrayList<>(timeSlots);
     }
 
-    public void addTimeslot(Timeslot timeslot) {
-        this.timeslots.add(timeslot);
+    public void addTimeslot(TimeSlot timeSlot) {
+        this.timeSlots.add(timeSlot);
     }
 }
