@@ -1,0 +1,18 @@
+Classroom {
+    code: 7601, capacity: 50, facilities: [papan, meja, dll];
+    code: 7602, capacity: 10;
+    code: 7603, capacity: 66, facilities: [lcd];
+}
+
+Course {
+    code: IF1234, name: RSPDL, credit: 2,
+    class: {
+
+    };
+}
+
+Lecturer {
+    employee_id: 12340, name: erick;
+    employee_id: 12341, name: wijaya;
+    employee_id: 12342, name: kusuma;
+}
