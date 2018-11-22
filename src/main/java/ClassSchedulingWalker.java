@@ -37,8 +37,8 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
     	for (ClassSchedulingParser.CreateLecturerContext context : ctx) {
 			String id = "";
 			String name = "";
-			List<DayTime> notPreferredTimes = new ArrayList<DayTime>();
-			List<String> preferredCourses = new ArrayList<String>();
+			List<DayTime> notPreferredTimes = new ArrayList<>();
+			List<String> preferredCourses = new ArrayList<>();
 
     		for (ClassSchedulingParser.LineContext line : context.createParam().line()) {
 				switch (line.map().key().WORD().toString()) {
