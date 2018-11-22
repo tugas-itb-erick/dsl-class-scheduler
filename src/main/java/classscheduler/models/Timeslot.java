@@ -15,9 +15,5 @@ public class Timeslot {
 
     private String className;
 
-    private int day;
-
-    private int startTime;
-
-    private int endTime;
+    private DayTime dayTime;
 }

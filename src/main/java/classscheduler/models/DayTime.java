@@ -18,7 +18,7 @@ public class DayTime {
 
     private List<Integer> times;
 
-    private void addTime(int time) {
+    public void addTime(int time) {
         times.add(time);
     }
 }
