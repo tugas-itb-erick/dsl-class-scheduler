@@ -1,6 +1,8 @@
 package classscheduler.model;
 
-
+@AllArgsConstructor
+@Getter
+@Setter
 public class Course {
 
     private String id;
