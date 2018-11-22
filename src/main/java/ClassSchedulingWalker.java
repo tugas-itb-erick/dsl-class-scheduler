@@ -5,10 +5,10 @@ import classscheduler.models.DayTime;
 import classscheduler.models.Lecturer;
 import classscheduler.enums.Day;
 import classscheduler.repositories.*;
-import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
     private ClassroomRepository classroomRepository;
@@ -19,8 +19,7 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
     public ClassSchedulingWalker(ClassroomRepository classroomRepository,
                                  ClazzRepository clazzRepository,
                                  CourseRepository courseRepository,
-                                 LecturerRepository lecturerRepository,
-                                 TimeSlotRepository timeSlotRepository) {
+                                 LecturerRepository lecturerRepository) {
         this.classroomRepository = classroomRepository;
         this.clazzRepository = clazzRepository;
         this.courseRepository = courseRepository;
@@ -47,29 +46,25 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
 						id = line.map().value().WORD(0).toString();
 						break;
 					case "name":
-						for (TerminalNode word : line.map().value().WORD()) {
-							name = name + " " + word.toString();
-						}
+						name = line.map().value().WORD().stream().map(word -> word.toString()).collect(Collectors.joining(" "));
 						break;
 					case "preferred_courses":
-						for (TerminalNode word : line.map().value().WORD()) {
-							preferredCourses.add(word.toString());
-						}
+						line.map().value().WORD().forEach(word -> preferredCourses.add(word.toString().replace("_", " ")));
 						break;
 					case "not_preferred_times":
-						for (ClassSchedulingParser.MapContext map : line.map().value().map()) {
+						line.map().value().map().forEach(map -> {
 							Day day = Day.valueOf(map.key().WORD().toString().toUpperCase());
 							List<Integer> times = new ArrayList<>();
-							for (TerminalNode word : map.value().WORD()) {
-								times.add(Integer.parseInt(word.toString()));
-							}
+							map.value().WORD().forEach(time -> times.add(Integer.parseInt(time.toString())));
 							notPreferredTimes.add(new DayTime(day, times));
-						}
+						});
 						break;
 				}
 			}
 
-    		lecturerRepository.addLecturer(new Lecturer(id, name, notPreferredTimes, preferredCourses));
+			Lecturer lecturer = new Lecturer(id, name, notPreferredTimes, preferredCourses);
+    		System.out.println(lecturer);
+    		lecturerRepository.addLecturer(lecturer);
 		}
     }
 
@@ -87,12 +82,11 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
                         capacity = Integer.parseInt(lineContext.map().value().WORD(0).toString());
                         break;
                     case "facilities":
-                        for (TerminalNode word : lineContext.map().value().WORD()) {
-                            facilities.add(word.toString());
-                        }
+                    	lineContext.map().value().WORD().forEach(facility -> facilities.add(facility.toString().replace("_", " ")));
                 }
             }
             Classroom classroom = new Classroom(id, capacity, facilities);
+			System.out.println(classroom);
             classroomRepository.addClassroom(classroom);
         }
     }
@@ -120,6 +114,7 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
 				}
 			}
 			Clazz clazz = new Clazz(name, courseId, quota, lecturerId);
+			System.out.println(clazz);
 			clazzRepository.addClazz(clazz);
 		}
     }
@@ -136,17 +131,18 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
 						id = lineContext.map().value().WORD(0).toString();
 						break;
 					case "name":
-						name = lineContext.map().value().WORD(0).toString();
+						name = lineContext.map().value().WORD().stream().map(word -> word.toString()).collect(Collectors.joining(" "));
 						break;
 					case "credits":
 						credits = Integer.parseInt(lineContext.map().value().WORD(0).toString());
 						break;
 					case "facilities":
-						lineContext.map().value().WORD().forEach(word -> facilities.add(word.toString()));
+						lineContext.map().value().WORD().forEach(word -> facilities.add(word.toString().replace("_", " ")));
 						break;
 				}
 			}
 			Course course = new Course(id, name, credits, facilities);
+			System.out.println(course);
 			courseRepository.addCourse(course);
 		}
     }

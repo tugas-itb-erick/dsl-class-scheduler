@@ -1,6 +1,6 @@
 Lecturer:
     id: 123456
-    name: Yudis
+    name: Yudis Dwi
     preferred_courses: IF4031 IF4150
     not_preferred_times:
         monday: 7 8 9
