@@ -30,16 +30,36 @@ public class ClassScheduler {
     }
 
 
-    public void init() {
+    public void preprocess() {
+        List<Clazz> newClasses = clazzRepository.getClasses();
         // sort clazzRepo by lecturer's availability asc
-        // duplicate clazzRepos: example [class A 2 credit, class B 3 credit, class C 1 credit] -> [class A, class A, class B, class B, class B, class C]
+        newClasses.sort(Comparator.comparing(clazz -> {
+            Lecturer lecturer = lecturerRepository.getLecturers().get(clazz.getLecturerId());
+            return lecturer.getPreferredTimes().size();
+        }));
+        // duplicate clazzRepos: example [class A 2 credit, class B 3 credit, class C 1 credit] ->
+        // [class A, class A, class B, class B, class B, class C]
+        List<Clazz> duplicatedClasses = new ArrayList<>();
+        newClasses.forEach(clazz -> {
+            Course course = courseRepository.getCourses().get(clazz.getCourseId());
+            for (int i=0; i<course.getCredits(); i++) {
+                duplicatedClasses.add(clazz);
+            }
+        });
+        clazzRepository.setClasses(duplicatedClasses);
     }
 
     public void startScheduling() {
+        preprocess();
         boolean foundSchedule = schedulingRecursive(0);
+        if (foundSchedule) {
+            System.out.println(schedule.toString());
+        } else {
+            System.out.println("No schedule can satisfy the constraints.");
+        }
     }
 
-    public boolean schedulingRecursive(int classIndex) {
+    private boolean schedulingRecursive(int classIndex) {
         if (classIndex < 0) {
             return false;
         } else if (classIndex >= clazzRepository.getClasses().size()) {
