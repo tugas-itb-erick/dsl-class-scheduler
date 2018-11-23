@@ -1,3 +1,4 @@
+import classscheduler.ClassScheduler;
 import classscheduler.repositories.*;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
@@ -20,15 +21,22 @@ public class Main {
         ClazzRepository clazzRepository = new ClazzRepository();
         CourseRepository courseRepository = new CourseRepository();
         LecturerRepository lecturerRepository = new LecturerRepository();
-        TimeSlotRepository timeSlotRepository = new TimeSlotRepository();
 
         ParseTree tree = parser.file();
         ParseTreeWalker walker = new ParseTreeWalker();
 
-        walker.walk(new ClassSchedulingWalker(
+        ClassSchedulingWalker classSchedulingWalker = new ClassSchedulingWalker(
                 classroomRepository,
                 clazzRepository,
                 courseRepository,
-                lecturerRepository), tree);
+                lecturerRepository);
+        walker.walk(classSchedulingWalker, tree);
+
+        ClassScheduler classScheduler = new ClassScheduler(
+                classroomRepository,
+                clazzRepository,
+                courseRepository,
+                lecturerRepository);
+        classScheduler.startScheduling();
     }
 }

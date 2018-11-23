@@ -81,7 +81,7 @@ Course:
 
 Course:
     id: IF4070
-    name: 	Representasi Pengetahuan dan Penalaran
+    name: Representasi Pengetahuan dan Penalaran
     credits: 3
     facilities: papan_tulis lcd laptop
 

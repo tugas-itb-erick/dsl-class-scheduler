@@ -33,7 +33,7 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
 		createCourse(ctx.createCourse());
     }
 
-    public void createLecturer(List<ClassSchedulingParser.CreateLecturerContext> ctx) {
+    private void createLecturer(List<ClassSchedulingParser.CreateLecturerContext> ctx) {
     	for (ClassSchedulingParser.CreateLecturerContext context : ctx) {
 			String id = "";
 			String name = "";
@@ -63,7 +63,7 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
 		}
     }
 
-    public void createClassroom(List<ClassSchedulingParser.CreateClassroomContext> ctx) {
+    private void createClassroom(List<ClassSchedulingParser.CreateClassroomContext> ctx) {
         for (ClassSchedulingParser.CreateClassroomContext createClassroomContext : ctx) {
             String id = "";
             int capacity = 0;
@@ -85,7 +85,7 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
         }
     }
 
-    public void createClass(List<ClassSchedulingParser.CreateClassContext> ctx) {
+    private void createClass(List<ClassSchedulingParser.CreateClassContext> ctx) {
     	for (ClassSchedulingParser.CreateClassContext createClassContext : ctx) {
 			String name = "";
 			String courseId = "";
@@ -112,7 +112,7 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
 		}
     }
 
-    public void createCourse(List<ClassSchedulingParser.CreateCourseContext> ctx) {
+    private void createCourse(List<ClassSchedulingParser.CreateCourseContext> ctx) {
     	for (ClassSchedulingParser.CreateCourseContext createCourseContext : ctx) {
 			String id = "";
 			String name = "";
