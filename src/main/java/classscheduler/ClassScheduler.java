@@ -2,13 +2,8 @@ package classscheduler;
 
 import classscheduler.enums.Day;
 import classscheduler.models.*;
-import classscheduler.enums.Day;
 import classscheduler.repositories.*;
-import sun.util.resources.cldr.az.TimeZoneNames_az;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.IntStream;
@@ -22,8 +17,10 @@ public class ClassScheduler {
     private LecturerRepository lecturerRepository;
     private Schedule schedule;
 
-    public ClassScheduler(ClassroomRepository classroomRepository, ClazzRepository clazzRepository,
-                          CourseRepository courseRepository, LecturerRepository lecturerRepository) {
+    public ClassScheduler(ClassroomRepository classroomRepository,
+						  ClazzRepository clazzRepository,
+                          CourseRepository courseRepository,
+						  LecturerRepository lecturerRepository) {
         this.schedule = new Schedule();
         this.classroomRepository = classroomRepository;
         this.clazzRepository = clazzRepository;
@@ -31,19 +28,16 @@ public class ClassScheduler {
         this.lecturerRepository = lecturerRepository;
     }
 
-    public void preprocess() {
+    private void preprocess() {
         List<Clazz> newClasses = clazzRepository.getClasses();
-        // sort clazzRepo by lecturer's availability asc
         newClasses.sort(Comparator.comparing(clazz -> {
             Lecturer lecturer = lecturerRepository.getLecturers().get(clazz.getLecturerId());
             return lecturer.getPreferredTimes().size();
         }));
-        // duplicate clazzRepos: example [class A 2 credit, class B 3 credit, class C 1 credit] ->
-        // [class A, class A, class B, class B, class B, class C]
         List<Clazz> duplicatedClasses = new ArrayList<>();
         newClasses.forEach(clazz -> {
             Course course = courseRepository.getCourses().get(clazz.getCourseId());
-            for (int i=0; i<course.getCredits(); i++) {
+            for (int i = 0; i<course.getCredits(); i++) {
                 duplicatedClasses.add(clazz);
             }
         });
@@ -86,11 +80,10 @@ public class ClassScheduler {
 
     private boolean schedulingRecursive(int classIndex) {
         if (classIndex >= clazzRepository.getClasses().size()) {
-            // semua kelas ud masuk ke schedule
             return true;
         } else {
             Clazz currentClass = clazzRepository.getClasses().get(classIndex);
-            Course currentCourse = courseRepository.getCourses().get(currentClass.getCourseId()); // blm cek null
+            Course currentCourse = courseRepository.getCourses().get(currentClass.getCourseId());
             String lecturerId = currentClass.getLecturerId();
             List<DayTime> dayTimes = lecturerRepository.getLecturers().get(lecturerId).getPreferredTimes();
             for (DayTime dayTime : dayTimes) {
@@ -99,13 +92,12 @@ public class ClassScheduler {
                     Optional<Classroom> bestClassroom = getBestClassroom(dayHour,
                             currentCourse.getFacilities(), currentClass.getQuota());
                     if (isCourseExceedCreditLimit(dayTime.getDay(), currentCourse.getId())) {
-                        break; // skip to next day
+                        break;
                     }
                     if (!bestClassroom.isPresent() || isLecturerTeaching(dayHour, lecturerId) ||
                             isCourseConflict(dayHour, currentCourse)) {
-                        continue; // skip to next hour
+                        continue;
                     }
-                    // in here, all constraints are *currently* satisfied
                     Session session = new Session(currentClass, bestClassroom.get());
                     schedule.addSession(dayHour, session);
                     boolean valid = schedulingRecursive(classIndex + 1);
@@ -117,7 +109,6 @@ public class ClassScheduler {
                 }
             }
         }
-        // semua waktu yg dosen punya ga pas, jadi kita backtrack
         return false;
     }
 
@@ -135,17 +126,8 @@ public class ClassScheduler {
             return Optional.empty();
         }
         copy.sort(Comparator.comparingInt(Classroom::getCapacity));
-        return Optional.of(copy.get(0)); // get classroom with highest capacity
+        return Optional.of(copy.get(0));
     }
-
-//    private boolean isLecturerExceedCreditLimit(Day day, String lecturerId) {
-//        long count = IntStream.range(7, 17 + 1).mapToObj(hour -> new DayHour(day, hour))
-//                .mapToLong(dayHour -> schedule.getSessions().getOrDefault(dayHour, Collections.emptyList())
-//                        .stream().filter(session -> lecturerId.equals(session.getClazz().getLecturerId()))
-//                        .count())
-//                .sum();
-//        return count >= CREDIT_LIMIT_PER_DAY;
-//    }
 
     private boolean isCourseExceedCreditLimit(Day day, String courseId) {
         long count = IntStream.range(7, 17 + 1).mapToObj(hour -> new DayHour(day, hour))
@@ -173,5 +155,4 @@ public class ClassScheduler {
         }
         return false;
     }
-
 }

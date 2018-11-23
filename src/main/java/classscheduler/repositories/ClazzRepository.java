@@ -12,7 +12,7 @@ import java.util.*;
 @ToString
 public class ClazzRepository {
 
-    private List<Clazz> classes; // jgn pake map yg ini
+    private List<Clazz> classes;
 
     public ClazzRepository() {
         this.classes = new ArrayList<>();

@@ -1,6 +1,5 @@
 package classscheduler.repositories;
 
-
 import classscheduler.models.Classroom;
 import lombok.Getter;
 import lombok.Setter;
