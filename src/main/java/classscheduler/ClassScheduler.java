@@ -60,50 +60,40 @@ public class ClassScheduler {
     }
 
     private boolean schedulingRecursive(int classIndex) {
-        if (classIndex < 0) {
-            return false;
-        } else if (classIndex >= clazzRepository.getClasses().size()) {
+        if (classIndex >= clazzRepository.getClasses().size()) {
+            // semua kelas ud masuk ke schedule
             return true;
         } else {
-            int timeIndex = 0;
             Clazz currentClass = clazzRepository.getClasses().get(classIndex);
             Course currentCourse = courseRepository.getCourses().get(currentClass.getCourseId()); // blm cek null
             String lecturerId = currentClass.getLecturerId();
-            List<DayHour> availability = convertDayTimeListToDayHourList(lecturerRepository.getLecturers()
-                    .get(lecturerId).getPreferredTimes());
-            int availabilitySize = availability.size();
-            while (timeIndex < availabilitySize) { // iterasi semua waktu available dosen
-                Optional<Classroom> bestClassroom = getBestClassroom(availability.get(timeIndex),
-                        currentCourse.getFacilities(), currentClass.getQuota());
-                if (bestClassroom.isPresent() &&
-                        !isLecturerTeaching(availability.get(timeIndex), lecturerId) &&
-                        !isLecturerExceedCreditLimit(availability.get(timeIndex).getDay(), lecturerId)) {
+            List<DayTime> dayTimes = lecturerRepository.getLecturers().get(lecturerId).getPreferredTimes();
+            for (DayTime dayTime : dayTimes) {
+                for (Integer time : dayTime.getTimes()) {
+                    DayHour dayHour = new DayHour(dayTime.getDay(), time);
+                    Optional<Classroom> bestClassroom = getBestClassroom(dayHour,
+                            currentCourse.getFacilities(), currentClass.getQuota());
+                    if (isLecturerExceedCreditLimit(dayTime.getDay(), lecturerId)) {
+                        break; // skip to next day
+                    }
+                    if (!bestClassroom.isPresent() || isLecturerTeaching(dayHour, lecturerId) /*||
+                            isCourseConflict(dayHour, currentCourse)*/) {
+                        continue; // skip to next hour
+                    }
+                    // in here, all constraints are *currently* satisfied
                     Session session = new Session(currentClass, bestClassroom.get());
-                    schedule.addSession(availability.get(timeIndex), session);
-                    boolean valid = schedulingRecursive(++classIndex);
+                    schedule.addSession(dayHour, session);
+                    boolean valid = schedulingRecursive(classIndex + 1);
                     if (valid) {
                         return true;
                     } else {
-                        schedule.deleteSession(availability.get(timeIndex), bestClassroom.get().getId());
+                        schedule.deleteSession(dayHour, bestClassroom.get().getId());
                     }
                 }
-                ++timeIndex;
             }
-            // semua waktu yg dosen punya ga pas: backtrack here
-            return false;
         }
-    }
-
-    private List<DayHour> convertDayTimeListToDayHourList(List<DayTime> dayTimes) {
-        List<DayHour> dayHours = new ArrayList<>();
-        dayTimes.forEach(dayTime -> dayHours.addAll(convertDayTimeToDayHourList(dayTime)));
-        return dayHours;
-    }
-
-    private List<DayHour> convertDayTimeToDayHourList(DayTime dayTime) {
-        List<DayHour> dayHours = new ArrayList<>();
-        dayTime.getTimes().forEach(hour -> dayHours.add(new DayHour(dayTime.getDay(), hour)));
-        return dayHours;
+        // semua waktu yg dosen punya ga pas, jadi kita backtrack
+        return false;
     }
 
     private boolean isLecturerTeaching(DayHour dayHour, String lecturerId) {
@@ -130,6 +120,24 @@ public class ClassScheduler {
                         .count())
                 .sum();
         return count >= CREDIT_LIMIT_PER_DAY;
+    }
+
+    private boolean isCourseConflict(DayHour dayHour, Course course) {
+//        List<Session> sessions = schedule.getSessions().getOrDefault(dayHour, Collections.emptyList());
+//        for (Session session : sessions) {
+//            Course courseInSchedule = courseRepository.getCourses().get(session.getClazz().getCourseId());
+//            for (String courseId : course.getConstrainedCourseIds()) {
+//                if (courseInSchedule.getConstrainedCourseIds().contains(courseId)) {
+//                    return true;
+//                }
+//            }
+//            for (String courseId : courseInSchedule.getConstrainedCourseIds()) {
+//                if (course.getConstrainedCourseIds().contains(courseId)) {
+//                    return true;
+//                }
+//            }
+//        }
+        return false;
     }
 
 }
