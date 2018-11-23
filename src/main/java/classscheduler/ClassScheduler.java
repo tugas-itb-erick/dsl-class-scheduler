@@ -9,6 +9,12 @@ import java.util.*;
 import java.util.stream.IntStream;
 
 public class ClassScheduler {
+    private static final String ANSI_RESET = "\u001B[0m";
+    private static final String ANSI_RED = "\u001B[31m";
+    private static final String ANSI_BLUE = "\u001B[34m";
+    private static final String ANSI_GREEN = "\u001B[32m";
+    private static final String ANSI_PURPLE = "\u001B[35m";
+    private static final String ANSI_CYAN = "\u001B[36m";
     private static final int CREDIT_LIMIT_PER_DAY = 2;
 
     private ClassroomRepository classroomRepository;
@@ -52,25 +58,25 @@ public class ClassScheduler {
 
     private void printSchedule() {
 		Arrays.asList(Day.values()).forEach(day -> {
-			System.out.println(day.toString().substring(0, 1) + day.toString().substring(1).toLowerCase() + ":");
+			System.out.println(ANSI_PURPLE + day.toString().substring(0, 1) + day.toString().substring(1).toLowerCase() + ":\n" + ANSI_RESET);
 			IntStream.range(7, 18).forEach(hour -> {
 				LocalTime startTime = LocalTime.of(hour,0);
 				LocalTime endTime = LocalTime.of(hour + 1, 0);
 				String duration = startTime + " - " + endTime;
 				List<Session> currentSessions = schedule.getSessions().get(new DayHour(day, hour));
 				if (currentSessions == null) {
-					System.out.println("\t" + duration + ": No class");
+					System.out.println("\t" + ANSI_BLUE + duration + ANSI_RESET + ":" + ANSI_RED + " No class\n" + ANSI_RESET);
 				} else {
-					System.out.println("\t" + duration + ":");
+					System.out.println("\t" + ANSI_BLUE + duration + ANSI_RESET + ":\n");
 					currentSessions.forEach(session -> {
 						String courseId = session.getClazz().getCourseId();
 						String courseName = courseRepository.getCourses().get(courseId).getName();
 						String lecturerId = session.getClazz().getLecturerId();
 						String lecturerName = lecturerRepository.getLecturers().get(lecturerId).getName();
 						String classroomId = session.getClassroom().getId();
-						System.out.println("\t\t1.  " + courseId + " " + courseName);
-						System.out.println("\t\t\t" + "Lecturer: " + lecturerName);
-						System.out.println("\t\t\t" + "Classroom: " + classroomId);
+						System.out.println("\t\t\t" + ANSI_GREEN + courseId + " " + courseName + ANSI_RESET);
+						System.out.println("\t\t\t" + ANSI_CYAN + "Lecturer: " + lecturerName + ANSI_RESET);
+						System.out.println("\t\t\t" + "Classroom: " + classroomId + "\n");
 					});
 				}
 			});
