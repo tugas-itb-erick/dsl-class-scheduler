@@ -101,7 +101,7 @@ Course:
 Course:
     id: IF4090
     name: Kerja Praktek
-    credits: 3
+    credits: 2
     constraint_course: IF4071 IF4150
 
 Course:
@@ -201,9 +201,9 @@ Class:
 
 Class:
     course_id: IF4072
-    name: K1
+    name: K2
     quota: 55
-    lecturer_id: 864202
+    lecturer_id: 124578
 
 Class:
     course_id: IF4070
