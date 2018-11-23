@@ -1,0 +1,230 @@
+Lecturer:
+    id: 123456
+    name: Yudis Dwi
+    preferred_times:
+        monday: 7 8 9
+        tuesday: 13 14 15
+
+Lecturer:
+    id: 987654
+    name: Adi Mulyanto
+    preferred_times:
+        monday: 7 8 9
+        tuesday: 12 14 15
+
+Lecturer:
+    id: 135791
+    name: Windy Gambetta
+    preferred_times:
+        tuesday: 10 11 14 15
+        wednesday: 7 8 9 10
+
+Lecturer:
+    id: 246802
+    name: Masayu
+    preferred_times:
+        wednesday: 8 9 11 12
+        thursday: 12 14 15
+
+Lecturer:
+    id: 975319
+    name: Iping
+    preferred_times:
+        thursday: 15 16 17
+        friday: 14 15 16
+
+Lecturer:
+    id: 864202
+    name: Ayu
+    preferred_times:
+        tuesday: 13 15 16 17
+        wednesday: 9 10 14 16
+
+Lecturer:
+    id: 124578
+    name: Dessi Puji
+    preferred_times:
+        monday: 8 9 11 12 13
+        tuesday: 12 14 15
+        thursday: 9 10 11 13
+
+Lecturer:
+    id: 235689
+    name: Bayu
+    preferred_times:
+        monday: 8 9 13 14 16
+        friday: 7 8 14 15
+
+Lecturer:
+    id: 134679
+    name: Yani Widyani
+    preferred_times:
+        wednesday: 7 8 9 11 12 14
+        thursday: 12 14 15 17
+        friday: 10 13 14
+
+Lecturer:
+    id: 129856
+    name: Fazat
+    preferred_times:
+        monday: 7 8 9
+        tuesday: 12 14 15
+        wednesday: 11 12 13
+        friday: 13 15 17
+
+Course:
+    id: IF4150
+    name: Rekayasa Perangkat Lunak Spesifik Domain
+    credits: 2
+    facilities: papan_tulis lcd
+    constraint_course: IF4071 IF4090
+
+Course:
+    id: IF4070
+    name: Representasi Pengetahuan dan Penalaran
+    credits: 3
+    facilities: papan_tulis lcd laptop
+
+Course:
+    id: IF4071
+    name: Pembelajaran Mesin
+    credits: 3
+    facilities: papan_tulis lcd pc
+    constraint_course: IF4150 IF4090
+
+Course:
+    id: IF4072
+    name: Pemrosesan Text dan Suara Bahasa Alami
+    credits: 3
+    facilities: papan_tulis lcd microphone pc
+
+Course:
+    id: IF4090
+    name: Kerja Praktek
+    credits: 2
+    constraint_course: IF4071 IF4150
+
+Course:
+    id: IF4043
+    name: Sistem Informasi Lanjut
+    credits: 3
+    facilities: papan_tulis lcd
+
+Course:
+    id: IF4040
+    name: Pemodelan Data Lanjut
+    credits: 3
+    facilities: papan_tulis lcd
+
+Course:
+    id: IF4073
+    name: Interpretasi dan Pengolahan Citra
+    credits: 3
+    facilities: papan_tulis lcd pc
+
+Classroom:
+    id: 7601
+    capacity: 90
+    facilities: papan_tulis lcd pc microphone
+
+Classroom:
+    id: 7606
+    capacity: 55
+    facilities: papan_tulis lcd pc microphone
+
+Classroom:
+    id: 7609
+    capacity: 40
+    facilities: papan_tulis lcd microphone
+
+Classroom:
+    id: 7610
+    capacity: 40
+    facilities: papan_tulis lcd microphone
+
+Classroom:
+    id: 7608
+    capacity: 60
+    facilities: papan_tulis lcd laptop microphone
+
+Classroom:
+    id: 7603
+    capacity: 40
+    facilities: papan_tulis lcd laptop
+
+Classroom:
+    id: 7604
+    capacity: 40
+    facilities: papan_tulis lcd laptop
+
+Class:
+    course_id: IF4150
+    name: K1
+    quota: 50
+    lecturer_id: 123456
+
+Class:
+    course_id: IF4150
+    name: K2
+    quota: 55
+    lecturer_id: 987654
+
+Class:
+    course_id: IF4150
+    name: K3
+    quota: 50
+    lecturer_id: 235689
+
+Class:
+    course_id: IF4071
+    name: K1
+    quota: 50
+    lecturer_id: 246802
+
+Class:
+    course_id: IF4071
+    name: K2
+    quota: 50
+    lecturer_id: 124578
+
+Class:
+    course_id: IF4090
+    name: K1
+    quota: 80
+    lecturer_id: 134679
+
+Class:
+    course_id: IF4072
+    name: K1
+    quota: 55
+    lecturer_id: 864202
+
+Class:
+    course_id: IF4072
+    name: K2
+    quota: 55
+    lecturer_id: 124578
+
+Class:
+    course_id: IF4070
+    name: K1
+    quota: 50
+    lecturer_id: 135791
+
+Class:
+    course_id: IF4043
+    name: K1
+    quota: 40
+    lecturer_id: 135791
+
+Class:
+    course_id: IF4040
+    name: K1
+    quota: 45
+    lecturer_id: 129856
+
+Class:
+    course_id: IF4073
+    name: K1
+    quota: 40
+    lecturer_id: 975319
