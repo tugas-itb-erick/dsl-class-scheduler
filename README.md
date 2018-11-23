@@ -24,11 +24,10 @@ In the DSL, we implement several use cases:
 4. Run Main.java. 
 
 ## Writing the DSL
-### 1. Syntax
+### 1. Examples
+Examples can be viewed in the example [input file](http://gitlab.informatika.org/IF4150_13515034_13515057_13515063_13515124/dsl-class-scheduling/blob/master/src/main/resources/data.txt). 
 
-### 2. Examples
-
-### 3. Running the DSL
+### 2. Running the DSL
 To run your DSL code, simply put your code in ```resources``` folder. In main program, change:
 
 ```InputStream is = Main.class.getResourceAsStream("data.txt");```
@@ -38,7 +37,7 @@ to
 ```InputStream is = Main.class.getResourceAsStream("yourFileName.yourFileExtension");```
 
 ## Documentation
-https://drive.google.com/open?id=1aQvkiKIp0GxF5lm2YYQQRQoEFydyZi6x
+https://docs.google.com/document/d/1PdZ7FJ2zcIwpBq8XltUSvhKnQsJdPg1CKU6YcXmI1-E
 
 ## Plugins
 1. [Antlr](https://plugins.jetbrains.com/plugin/7358-antlr-v4-grammar-plugin)
