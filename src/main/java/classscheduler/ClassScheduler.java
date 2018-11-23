@@ -4,7 +4,12 @@ import classscheduler.enums.Day;
 import classscheduler.models.*;
 import classscheduler.enums.Day;
 import classscheduler.repositories.*;
+import sun.util.resources.cldr.az.TimeZoneNames_az;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.IntStream;
 
@@ -47,13 +52,37 @@ public class ClassScheduler {
 
     public void startScheduling() {
         preprocess();
-        boolean foundSchedule = schedulingRecursive(0);
-        if (foundSchedule) {
-            System.out.println(schedule.toString());
-        } else {
-            System.out.println("No schedule can satisfy the constraints.");
-        }
+        schedulingRecursive(0);
+		printSchedule();
     }
+
+    private void printSchedule() {
+		Arrays.asList(Day.values()).forEach(day -> {
+			System.out.println(day.toString().substring(0, 1) + day.toString().substring(1).toLowerCase() + ":");
+			IntStream.range(7, 18).forEach(hour -> {
+				LocalTime startTime = LocalTime.of(hour,0);
+				LocalTime endTime = LocalTime.of(hour + 1, 0);
+				String duration = startTime + " - " + endTime;
+				List<Session> currentSessions = schedule.getSessions().get(new DayHour(day, hour));
+				if (currentSessions == null) {
+					System.out.println("\t" + duration + ": No class");
+				} else {
+					System.out.println("\t" + duration + ":");
+					currentSessions.forEach(session -> {
+						String courseId = session.getClazz().getCourseId();
+						String courseName = courseRepository.getCourses().get(courseId).getName();
+						String lecturerId = session.getClazz().getLecturerId();
+						String lecturerName = lecturerRepository.getLecturers().get(lecturerId).getName();
+						String classroomId = session.getClassroom().getId();
+						System.out.println("\t\t1.  " + courseId + " " + courseName);
+						System.out.println("\t\t\t" + "Lecturer: " + lecturerName);
+						System.out.println("\t\t\t" + "Classroom: " + classroomId);
+					});
+				}
+			});
+			System.out.println();
+		});
+	}
 
     private boolean schedulingRecursive(int classIndex) {
         if (classIndex >= clazzRepository.getClasses().size()) {
