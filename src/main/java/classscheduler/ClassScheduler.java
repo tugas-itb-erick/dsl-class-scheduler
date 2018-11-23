@@ -26,7 +26,6 @@ public class ClassScheduler {
         this.lecturerRepository = lecturerRepository;
     }
 
-
     public void preprocess() {
         List<Clazz> newClasses = clazzRepository.getClasses();
         // sort clazzRepo by lecturer's availability asc
