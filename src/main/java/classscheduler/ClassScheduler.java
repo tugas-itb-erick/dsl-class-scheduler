@@ -73,11 +73,11 @@ public class ClassScheduler {
                     DayHour dayHour = new DayHour(dayTime.getDay(), time);
                     Optional<Classroom> bestClassroom = getBestClassroom(dayHour,
                             currentCourse.getFacilities(), currentClass.getQuota());
-                    if (isLecturerExceedCreditLimit(dayTime.getDay(), lecturerId)) {
+                    if (isCourseExceedCreditLimit(dayTime.getDay(), currentCourse.getId())) {
                         break; // skip to next day
                     }
-                    if (!bestClassroom.isPresent() || isLecturerTeaching(dayHour, lecturerId) /*||
-                            isCourseConflict(dayHour, currentCourse)*/) {
+                    if (!bestClassroom.isPresent() || isLecturerTeaching(dayHour, lecturerId) ||
+                            isCourseConflict(dayHour, currentCourse)) {
                         continue; // skip to next hour
                     }
                     // in here, all constraints are *currently* satisfied
@@ -113,30 +113,39 @@ public class ClassScheduler {
         return Optional.of(copy.get(0)); // get classroom with highest capacity
     }
 
-    private boolean isLecturerExceedCreditLimit(Day day, String lecturerId) {
+//    private boolean isLecturerExceedCreditLimit(Day day, String lecturerId) {
+//        long count = IntStream.range(7, 17 + 1).mapToObj(hour -> new DayHour(day, hour))
+//                .mapToLong(dayHour -> schedule.getSessions().getOrDefault(dayHour, Collections.emptyList())
+//                        .stream().filter(session -> lecturerId.equals(session.getClazz().getLecturerId()))
+//                        .count())
+//                .sum();
+//        return count >= CREDIT_LIMIT_PER_DAY;
+//    }
+
+    private boolean isCourseExceedCreditLimit(Day day, String courseId) {
         long count = IntStream.range(7, 17 + 1).mapToObj(hour -> new DayHour(day, hour))
                 .mapToLong(dayHour -> schedule.getSessions().getOrDefault(dayHour, Collections.emptyList())
-                        .stream().filter(session -> lecturerId.equals(session.getClazz().getLecturerId()))
+                        .stream().filter(session -> session.getClazz().getCourseId().equals(courseId))
                         .count())
                 .sum();
         return count >= CREDIT_LIMIT_PER_DAY;
     }
 
     private boolean isCourseConflict(DayHour dayHour, Course course) {
-//        List<Session> sessions = schedule.getSessions().getOrDefault(dayHour, Collections.emptyList());
-//        for (Session session : sessions) {
-//            Course courseInSchedule = courseRepository.getCourses().get(session.getClazz().getCourseId());
-//            for (String courseId : course.getConstrainedCourseIds()) {
-//                if (courseInSchedule.getConstrainedCourseIds().contains(courseId)) {
-//                    return true;
-//                }
-//            }
-//            for (String courseId : courseInSchedule.getConstrainedCourseIds()) {
-//                if (course.getConstrainedCourseIds().contains(courseId)) {
-//                    return true;
-//                }
-//            }
-//        }
+        List<Session> sessions = schedule.getSessions().getOrDefault(dayHour, Collections.emptyList());
+        for (Session session : sessions) {
+            Course courseInSchedule = courseRepository.getCourses().get(session.getClazz().getCourseId());
+            for (String courseId : course.getConstraintCourse()) {
+                if (courseInSchedule.getConstraintCourse().contains(courseId)) {
+                    return true;
+                }
+            }
+            for (String courseId : courseInSchedule.getConstraintCourse()) {
+                if (course.getConstraintCourse().contains(courseId)) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 

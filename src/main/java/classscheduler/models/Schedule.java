@@ -71,7 +71,12 @@ public class Schedule {
         if (sessionList != null) {
             sessionList.removeIf(session -> session.getClassroom()
                     .getId().equals(classroomId));
+            sessionList = sessions.get(dayHour);
+            if (sessionList.isEmpty()) {
+                sessions.remove(dayHour);
+            }
         }
+
     }
 
     public void deleteSessions(DayHour dayHour) {
