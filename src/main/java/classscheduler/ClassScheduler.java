@@ -49,7 +49,8 @@ public class ClassScheduler {
             Clazz currentClass = clazzRepository.getClasses().get(classIndex);
             Course currentCourse = courseRepository.getCourses().get(currentClass.getCourseId()); // blm cek null
             String lecturerId = currentClass.getLecturerId();
-            List<DayTime> availability = lecturerRepository.getLecturers().get(lecturerId).getPreferredTimes();
+            List<DayHour> availability = convertDayTimeListToDayHourList(lecturerRepository.getLecturers()
+                    .get(lecturerId).getPreferredTimes());
             int availabilitySize = availability.size();
             while (timeIndex < availabilitySize) { // iterasi semua waktu available dosen
                 Optional<Classroom> bestClassroom = getBestClassroom(availability.get(timeIndex),
@@ -66,10 +67,23 @@ public class ClassScheduler {
                         schedule.deleteSession(availability.get(timeIndex), bestClassroom.get().getId());
                     }
                 }
+                ++timeIndex;
             }
             // semua waktu yg dosen punya ga pas: backtrack here
             return false;
         }
+    }
+
+    private List<DayHour> convertDayTimeListToDayHourList(List<DayTime> dayTimes) {
+        List<DayHour> dayHours = new ArrayList<>();
+        dayTimes.forEach(dayTime -> dayHours.addAll(convertDayTimeToDayHourList(dayTime)));
+        return dayHours;
+    }
+
+    private List<DayHour> convertDayTimeToDayHourList(DayTime dayTime) {
+        List<DayHour> dayHours = new ArrayList<>();
+        dayTime.getTimes().forEach(hour -> dayHours.add(new DayHour(dayTime.getDay(), hour)));
+        return dayHours;
     }
 
     private boolean isLecturerTeaching(DayHour dayHour, String lecturerId) {
