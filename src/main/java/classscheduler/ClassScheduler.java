@@ -15,18 +15,15 @@ public class ClassScheduler {
     private ClazzRepository clazzRepository;
     private CourseRepository courseRepository;
     private LecturerRepository lecturerRepository;
-    private TimeSlotRepository timeSlotRepository;
     private Schedule schedule;
 
     public ClassScheduler(ClassroomRepository classroomRepository, ClazzRepository clazzRepository,
-                          CourseRepository courseRepository, LecturerRepository lecturerRepository,
-                          TimeSlotRepository timeSlotRepository) {
+                          CourseRepository courseRepository, LecturerRepository lecturerRepository) {
         this.schedule = new Schedule();
         this.classroomRepository = classroomRepository;
         this.clazzRepository = clazzRepository;
         this.courseRepository = courseRepository;
         this.lecturerRepository = lecturerRepository;
-        this.timeSlotRepository = timeSlotRepository;
     }
 
 
