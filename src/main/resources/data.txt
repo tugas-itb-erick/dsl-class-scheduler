@@ -77,6 +77,7 @@ Course:
     name: Rekayasa Perangkat Lunak Spesifik Domain
     credits: 2
     facilities: papan_tulis lcd
+    constraint_course: IF4071 IF4090
 
 Course:
     id: IF4070
@@ -89,6 +90,7 @@ Course:
     name: Pembelajaran Mesin
     credits: 3
     facilities: papan_tulis lcd pc
+    constraint_course: IF4150 IF4090
 
 Course:
     id: IF4072
@@ -100,6 +102,7 @@ Course:
     id: IF4090
     name: Kerja Praktek
     credits: 3
+    constraint_course: IF4071 IF4150
 
 Course:
     id: IF4043

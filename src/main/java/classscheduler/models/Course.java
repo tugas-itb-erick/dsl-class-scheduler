@@ -20,4 +20,6 @@ public class Course {
     private int credits;
 
     private List<String> facilities;
+
+    private List<String> constraintCourse;
 }

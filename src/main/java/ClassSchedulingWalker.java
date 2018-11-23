@@ -118,6 +118,7 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
 			String name = "";
 			int credits = 0;
 			List<String> facilities = new ArrayList<>();
+			List<String> constraint_course = new ArrayList<>();
 			for (ClassSchedulingParser.LineContext lineContext : createCourseContext.createParam().line()) {
 				switch (lineContext.map().key().WORD().toString()) {
 					case "id":
@@ -132,9 +133,12 @@ public class ClassSchedulingWalker extends ClassSchedulingParserBaseListener {
 					case "facilities":
 						lineContext.map().value().WORD().forEach(word -> facilities.add(word.toString().replace("_", " ")));
 						break;
+					case "constraint_course":
+						lineContext.map().value().WORD().forEach(word -> constraint_course.add(word.toString().replace("_", " ")));
+						break;
 				}
 			}
-			Course course = new Course(id, name, credits, facilities);
+			Course course = new Course(id, name, credits, facilities, constraint_course);
 			courseRepository.addCourse(course);
 		}
     }
